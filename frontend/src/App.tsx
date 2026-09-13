@@ -1,4 +1,8 @@
 import {useState} from 'react';
+import ChatInput from "./components/ui/ChatInput";
+import "./App.css";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 export default function Home() {
 
@@ -43,21 +47,24 @@ export default function Home() {
     };
 
     return (
-        <div style={{maxWidth: 600, margin: "40px auto"}}>
-            <h1>AI Chatbot</h1>
-            <div style={{minHeight: '300px', border: '1px solid #ddd', padding: 10}}>
+        <div className="chat-app">
+            <div className="chat-messages">
                 {messages.map((m, i) => (
-                    <p key={i}><strong>{m.role}:</strong> {m.content}</p>
+                    <div className="message" key={i}>
+                        <strong>{m.role}:</strong>
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                            {m.content}
+                        </ReactMarkdown>
+                    </div>
                 ))}
             </div>
-            <input
-                value={input}
-                onChange={e => setInput(e.target.value)}
-                onKeyDown={e => e.key === "Enter" && send()}
-                placeholder="Type your message…"
-                style={{width: '80%'}}
-            />
-            <button onClick={send} style={{marginLeft: 5}}>Send</button>
+            <div className="chat-composer">
+                <ChatInput
+                    value={input}
+                    onChange={setInput}
+                    onSubmit={send}
+                />
+            </div>
         </div>
     );
 }
