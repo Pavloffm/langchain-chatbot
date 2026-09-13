@@ -6,7 +6,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from starlette.responses import StreamingResponse
 
-from llm import get_stream_answer
+from model import get_stream_answer
 
 load_dotenv()
 app = FastAPI(
@@ -18,12 +18,13 @@ app = FastAPI(
 
 class ChatRequest(BaseModel):
     message: str
+    thread_id: str
 
 
 @app.post("/chat")
 async def chat(request: ChatRequest):
     return StreamingResponse(
-        get_stream_answer(request.message),
+        get_stream_answer(request.message, request.thread_id,),
     )
 
 

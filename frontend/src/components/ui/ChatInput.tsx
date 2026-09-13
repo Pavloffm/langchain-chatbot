@@ -6,11 +6,12 @@ type ChatInputProps = {
     value: string;
     onChange: (value: string) => void;
     onSubmit: () => void;
+    disabled: boolean;
 };
 
-export default function ChatInput({value, onChange, onSubmit}: ChatInputProps) {
+export default function ChatInput({value, onChange, onSubmit, disabled}: ChatInputProps) {
     const handleKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
-        if (event.key === "Enter" && !event.shiftKey) {
+        if (event.key === "Enter" && !event.shiftKey && !disabled) {
             event.preventDefault();
             onSubmit();
         }
@@ -26,7 +27,7 @@ export default function ChatInput({value, onChange, onSubmit}: ChatInputProps) {
                 rows={3}
             />
             <div className="chat-input-actions">
-                <Button onClick={onSubmit} aria-label="Send message">↑</Button>
+                <Button onClick={onSubmit} aria-label="Send message" disabled={disabled}>↑</Button>
             </div>
         </div>
     );
