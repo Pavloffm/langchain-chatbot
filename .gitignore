@@ -23,6 +23,15 @@ frontend/dist-ssr/
 .env.*
 !.env.example
 
+# SQLite databases and temporary files
+*.sqlite
+*.sqlite3
+*.db
+*.db-shm
+*.db-wal
+*.sqlite-shm
+*.sqlite-wal
+
 # IDE and OS files
 .idea/
 .vscode/

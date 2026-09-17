@@ -45,6 +45,21 @@ body,
   padding: 24px;
   border-right: 1px solid var(--border);
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.sidebar nav button {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.sidebar nav {
+  overflow-y: auto;
+  flex: 1;
 }
 
 .chat-app {
